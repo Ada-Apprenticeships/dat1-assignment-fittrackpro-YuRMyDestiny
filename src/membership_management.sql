@@ -1,6 +1,6 @@
 -- Initial SQLite setup
 .open fittrackpro.db
-.mode column
+.mode table
 
 -- Enable foreign key support
 
