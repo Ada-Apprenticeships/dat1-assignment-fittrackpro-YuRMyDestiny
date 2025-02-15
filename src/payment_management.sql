@@ -15,7 +15,7 @@ SELECT strftime('%m', payment_date) AS month, SUM(amount) as total_revenue
 FROM payments 
 WHERE CAST(strftime('%Y', DATE('now')) AS INT) - CAST(strftime('%Y', payment_date) AS INT) = 1
 GROUP BY month;
-
+------ refactor? ------
 
 -- 3. Find all day pass purchases
 SELECT payment_id, amount, payment_date, payment_method
