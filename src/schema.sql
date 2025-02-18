@@ -71,7 +71,7 @@ CREATE TABLE staff (
     phone_number CHAR[8] UNIQUE NOT NULL,
     position VARCHAR[12] NOT NULL CHECK(position IN ('Trainer', 'Manager', 'Receptionist')), -- maintenance?
     hire_date DATE NOT NULL,
-    location_id 	INTEGER NOT NULL,
+    location_id INTEGER NOT NULL,
     FOREIGN KEY (location_id) REFERENCES locations(location_id)
 );
 
@@ -124,7 +124,7 @@ CREATE TABLE attendance (
     member_id INTEGER NOT NULL,
     location_id INTEGER NOT NULL,
     check_in_time DATETIME NOT NULL, -- check before check out time?
-    check_out_time DATETIME NOT NULL, -- check after check in time?
+    check_out_time DATETIME, -- check after check in time?
     FOREIGN KEY (member_id) REFERENCES members(member_id), 
     FOREIGN KEY (location_id) REFERENCES locations(location_id)
 );
