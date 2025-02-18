@@ -12,13 +12,16 @@ PRAGMA foreign_keys = ON;
 ----------------- UNCOMMENT THIS WHEN SUBMIT ------------------------
 
 -- 2. Calculate total revenue from membership fees for each month of the last year
-SELECT strftime('%m', payment_date) AS month, SUM(amount) as total_revenue
+SELECT 
+    strftime('%m', payment_date) AS month, 
+    SUM(amount) as total_revenue
 FROM payments 
-WHERE CAST(strftime('%Y', DATE('now')) AS INT) - CAST(strftime('%Y', payment_date) AS INT) = 1
+WHERE CAST(strftime('%Y', DATE('now')) AS INT) - 
+      CAST(strftime('%Y', payment_date) AS INT) = 1
 GROUP BY month;
 ------ refactor? ------
 
 -- 3. Find all day pass purchases
 SELECT payment_id, amount, payment_date, payment_method
-FROM payments
-WHERE payment_type = 'Day pass';
+FROM   payments
+WHERE  payment_type = 'Day pass';

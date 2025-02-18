@@ -8,18 +8,16 @@ PRAGMA foreign_keys = ON;
 
 -- 1. Record a member's gym visit
 -- TODO: Write a query to record a member's gym visit
--- INSERT INTO attendance (member_id, location_id, check_in_time)
--- VALUES (7, 1, datetime('now'));
+INSERT INTO attendance (member_id, location_id, check_in_time)
+VALUES (7, 1, datetime('now'));
 
 -- 2. Retrieve a member's attendance history
 -- TODO: Write a query to retrieve a member's attendance history
-SELECT 
-    strftime('%F', check_in_time) AS visit_date, 
-    strftime('%T', check_in_time) AS check_in_time, 
-    strftime('%T', check_out_time) AS check_out_time
-FROM attendance
-WHERE member_id = 5;
----------   breaking it in serveral lines? ----------------
+SELECT strftime('%F', check_in_time)  AS visit_date,
+       strftime('%T', check_in_time)  AS check_in_time,
+       strftime('%T', check_out_time) AS check_out_time
+FROM   attendance
+WHERE  member_id = 5; 
 
 -- 3. Find the busiest day of the week based on gym visits
 -- TODO: Write a query to find the busiest day of the week based on gym visits
@@ -33,7 +31,7 @@ SELECT
     when 5 THEN 'Friday'
     ELSE 'Saturday' END AS day_of_week, 
     COUNT(*) AS visit_count
-FROM attendance
+FROM  attendance
 GROUP BY day_of_week
 ORDER BY visit_count DESC
 LIMIT 1;
