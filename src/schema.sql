@@ -418,4 +418,8 @@ VALUES ('Hello', 'Tina', 'alice.j@email.com', '23456789', '1992-02-02', '2023-02
 INSERT INTO locations (name, address, phone_number, email, opening_hours)
 VALUES ('My home', '123 Hello World St', '555-1234', '12@3a@xyz.com', '09:00-18:00');
 
+-- NO GIFT CARDS ALLOWED !!
+INSERT INTO payments (member_id, amount, payment_date, payment_method, payment_type)
+VALUES (14, 15.00, '2025-01-18 11:15:00', 'Gift cards', 'Day pass');
+
 -- */ 
