@@ -7,12 +7,10 @@ PRAGMA foreign_keys = ON;
 -- Attendance Tracking Queries
 
 -- 1. Record a member's gym visit
--- TODO: Write a query to record a member's gym visit
 INSERT INTO attendance (member_id, location_id, check_in_time)
 VALUES (7, 1, datetime('now'));
 
 -- 2. Retrieve a member's attendance history
--- TODO: Write a query to retrieve a member's attendance history
 SELECT 
     strftime('%F', check_in_time)  AS visit_date,
     strftime('%T', check_in_time)  AS check_in_time,
@@ -21,7 +19,6 @@ FROM  attendance
 WHERE member_id = 5; 
 
 -- 3. Find the busiest day of the week based on gym visits
--- TODO: Write a query to find the busiest day of the week based on gym visits
 SELECT 
     CASE CAST(strftime('%w', check_in_time) AS integer)
     WHEN 0 THEN 'Sunday'
@@ -38,11 +35,8 @@ ORDER BY visit_count DESC
 LIMIT 1;
 
 -- 4. Calculate the average daily attendance for each location
--- TODO: Write a query to calculate the average daily attendance for each location
 SELECT name AS location_name, COUNT(DISTINCT(strftime('%F',check_in_time))) * 1.0 /
     (julianday('now') - julianday(MIN(check_in_time))) AS avg_daily_attendance
 FROM attendance
 JOIN locations ON locations.location_id = attendance.location_id
 GROUP BY location_name;
-
-------------------------- LOOK AT THISSS! NOT WORKING! --------------------------------
