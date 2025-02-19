@@ -46,7 +46,12 @@ CREATE TABLE locations (
     name VARCHAR[100] UNIQUE NOT NULL,
     address VARCHAR[255] UNIQUE NOT NULL,
     phone_number CHAR[8] UNIQUE NOT NULL,-- NOT NULL check
-    email VARCHAR[100] UNIQUE NOT NULL,-- REGEX?
+    email VARCHAR[100] UNIQUE NOT NULL CHECK (
+    email LIKE '%_@_%._%' AND
+        LENGTH(email) - LENGTH(REPLACE(email, '@', '')) = 1 AND
+        SUBSTR(LOWER(email), 1, INSTR(email, '.') - 1) NOT GLOB '*[^@0-9a-z]*' AND
+        SUBSTR(LOWER(email), INSTR(email, '.') + 1) NOT GLOB '*[^a-z]*'
+    ),
     opening_hours VARCHAR[11] NOT NULL -- checks?
 ); 
 
@@ -54,7 +59,12 @@ CREATE TABLE members (
     member_id INTEGER PRIMARY KEY,
     first_name VARCHAR[255] NOT NULL,
     last_name VARCHAR[255] NOT NULL,
-    email VARCHAR[255] UNIQUE NOT NULL,-- REGEX CHECK?
+    email VARCHAR[255] UNIQUE NOT NULL CHECK (
+        email LIKE '%_@_%._%' AND
+        LENGTH(email) - LENGTH(REPLACE(email, '@', '')) = 1 AND
+        SUBSTR(LOWER(email), 1, INSTR(email, '.') - 1) NOT GLOB '*[^@0-9a-z]*' AND
+        SUBSTR(LOWER(email), INSTR(email, '.') + 1) NOT GLOB '*[^a-z]*'
+    ),
     phone_number CHAR[8] UNIQUE NOT NULL,-- SUPPORT MORE CHARS?
     date_of_birth DATE NOT NULL,
     join_date DATE NOT NULL,
@@ -67,7 +77,12 @@ CREATE TABLE staff (
     staff_id INTEGER PRIMARY KEY,
     first_name VARCHAR[255] NOT NULL,
     last_name VARCHAR[255] NOT NULL,
-    email VARCHAR[255] UNIQUE NOT NULL,
+    email VARCHAR[255] UNIQUE NOT NULL CHECK (
+        email LIKE '%_@_%._%' AND
+        LENGTH(email) - LENGTH(REPLACE(email, '@', '')) = 1 AND
+        SUBSTR(LOWER(email), 1, INSTR(email, '.') - 1) NOT GLOB '*[^@0-9a-z]*' AND
+        SUBSTR(LOWER(email), INSTR(email, '.') + 1) NOT GLOB '*[^a-z]*'
+    ),
     phone_number CHAR[8] UNIQUE NOT NULL,
     position VARCHAR[12] NOT NULL CHECK(position IN ('Trainer', 'Manager', 'Receptionist', 'Maintenance')), -- maintenance?
     hire_date DATE NOT NULL,
@@ -380,3 +395,27 @@ VALUES
 (8, '2025-01-05', 'Display repair and sensor calibration', 8),
 (9, '2025-01-20', 'Frame inspection and tightening', 1),
 (10, '2025-01-25', 'Safety features check and padding replacement', 2);
+
+
+
+
+
+/* ------ COMMENT THIS LINE FOR ERROR CHECKS
+
+-- Duplicate Phone No.
+INSERT INTO locations (name, address, phone_number, email, opening_hours)
+VALUES ('My home', '123 Hello World St', '555-1234', 'email@example.com', '09:00-18:00');
+
+-- Invalid Phone no. length
+INSERT INTO locations (name, address, phone_number, email, opening_hours)
+VALUES ('Your home', '321 Foo St', '123-56789', 'e@gmail.com', '04:00-13:00');
+
+-- Duplicate Email
+INSERT INTO members (first_name, last_name, email, phone_number, date_of_birth, join_date, emergency_contact_name, emergency_contact_phone)
+VALUES ('Hello', 'Tina', 'alice.j@email.com', '23456789', '1992-02-02', '2023-02-02', 'Steve', '987-5432');
+
+-- Invalid Email
+INSERT INTO locations (name, address, phone_number, email, opening_hours)
+VALUES ('My home', '123 Hello World St', '555-1234', '12@3a@xyz.com', '09:00-18:00');
+
+-- */ 
