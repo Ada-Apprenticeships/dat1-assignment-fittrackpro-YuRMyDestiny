@@ -34,19 +34,19 @@ WHERE start_time LIKE '2025-02-01%'
 GROUP BY classes.class_id;
 
 -- 3. Register a member for a class
--- INSERT INTO class_attendance (member_id, schedule_id, attendance_status)
--- SELECT 11,
---        schedule_id,
---        'Registered'
--- FROM   class_schedule
--- WHERE  class_id = 3
---        AND start_time LIKE '2025-02-01%'; 
+INSERT INTO class_attendance (member_id, schedule_id, attendance_status)
+SELECT 11,
+       schedule_id,
+       'Registered'
+FROM   class_schedule
+WHERE  class_id = 3
+       AND start_time LIKE '2025-02-01%'; 
 
 
 -- 4. Cancel a class registration
--- DELETE FROM class_attendance
--- WHERE  member_id = 2
---        AND schedule_id = 7; 
+DELETE FROM class_attendance
+WHERE  member_id = 2
+  AND schedule_id = 7; 
 
 -- 5. List top 5 most popular classes
 SELECT 

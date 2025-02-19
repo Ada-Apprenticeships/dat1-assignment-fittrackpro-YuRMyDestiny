@@ -11,10 +11,9 @@ SELECT member_id, first_name, last_name, email, join_date
 FROM   members; 
 
 -- 2. Update a member's contact information
--- UPDATE members
--- SET email = 'emily.jones.updated@email.com', phone_number = '555-9876'
--- WHERE member_id = 5;
------------------   UNCOMMENT -------------------------------
+UPDATE members
+SET email = 'emily.jones.updated@email.com', phone_number = '555-9876'
+WHERE member_id = 5;
 
 -- 3. COUNT total number of members
 SELECT COUNT(*) AS 'Total number of members'
