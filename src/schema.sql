@@ -42,23 +42,23 @@ DROP TABLE IF EXISTS equipment_maintenance_log;
 -- `.read data/sample_data.sql` in a sql file or `npm run import` in the terminal
 
 CREATE TABLE locations (
-    location_id   INTEGER PRIMARY KEY,
-    name          VARCHAR[100] UNIQUE NOT NULL,
-    address       VARCHAR[255] UNIQUE NOT NULL,
-    phone_number  CHAR[8] UNIQUE NOT NULL,-- NOT NULL check
-    email         VARCHAR[100] UNIQUE NOT NULL,-- REGEX?
+    location_id INTEGER PRIMARY KEY,
+    name VARCHAR[100] UNIQUE NOT NULL,
+    address VARCHAR[255] UNIQUE NOT NULL,
+    phone_number CHAR[8] UNIQUE NOT NULL,-- NOT NULL check
+    email VARCHAR[100] UNIQUE NOT NULL,-- REGEX?
     opening_hours VARCHAR[11] NOT NULL -- checks?
 ); 
 
 CREATE TABLE members (
-    member_id               INTEGER PRIMARY KEY,
-    first_name              VARCHAR[255] NOT NULL,
-    last_name               VARCHAR[255] NOT NULL,
-    email                   VARCHAR[255] UNIQUE NOT NULL,-- REGEX CHECK?
-    phone_number            CHAR[8] UNIQUE NOT NULL,-- SUPPORT MORE CHARS?
-    date_of_birth           DATE NOT NULL,
-    join_date               DATE NOT NULL,
-    emergency_contact_name  VARCHAR[255] NOT NULL,
+    member_id INTEGER PRIMARY KEY,
+    first_name VARCHAR[255] NOT NULL,
+    last_name VARCHAR[255] NOT NULL,
+    email VARCHAR[255] UNIQUE NOT NULL,-- REGEX CHECK?
+    phone_number CHAR[8] UNIQUE NOT NULL,-- SUPPORT MORE CHARS?
+    date_of_birth DATE NOT NULL,
+    join_date DATE NOT NULL,
+    emergency_contact_name VARCHAR[255] NOT NULL,
     emergency_contact_phone VARCHAR[8] NOT NULL
 ); 
 
@@ -155,7 +155,7 @@ CREATE TABLE personal_training_sessions (
     session_date DATE NOT NULL, 
     start_time TIME NOT NULL, -- checks?
     end_time TIME NOT NULL, --checks?
-    notes VARCHAR[255], -- NOT NULL?
+    notes VARCHAR[255],
     FOREIGN KEY (member_id) REFERENCES members(member_id),
     FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
 );

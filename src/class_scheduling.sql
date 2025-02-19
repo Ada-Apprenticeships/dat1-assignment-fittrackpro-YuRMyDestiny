@@ -1,7 +1,7 @@
 -- Initial SQLite setup
 .open fittrackpro.db
 .mode table
-.timer on
+
 -- Enable foreign key support
 PRAGMA foreign_keys = ON;
 
@@ -9,14 +9,15 @@ PRAGMA foreign_keys = ON;
 
 -- 1. List all classes with their instructors
 -- TODO: Write a query to list all classes with their instructors
-SELECT class_schedule.class_id,
-       NAME       AS class_name,
-       first_name AS instructor_name
-FROM   class_schedule
-       JOIN staff
-         ON class_schedule.staff_id = staff.staff_id
-       JOIN classes
-         ON class_schedule.class_id = classes.class_id; 
+SELECT 
+  class_schedule.class_id,
+  name AS class_name,
+  CONCAT(first_name, ' ', last_name) AS instructor_name
+FROM class_schedule
+  JOIN staff
+    ON class_schedule.staff_id = staff.staff_id
+  JOIN classes
+    ON class_schedule.class_id = classes.class_id; 
 ------   ?  first + LAST NAME ?   ----------------
 
 -- 2. Find available classes for a specific date
@@ -46,17 +47,18 @@ WHERE  member_id = 2
 
 -- 5. List top 5 most popular classes
 -- TODO: Write a query to list top 5 most popular classes
-SELECT classes.class_id,
-       name                                  AS class_name,
-       SUM(attendance_status = 'Registered') AS registration_count
-FROM   class_schedule
-       JOIN class_attendance
-         ON class_schedule.schedule_id = class_attendance.schedule_id
-       JOIN classes
-         ON class_schedule.class_id = classes.class_id
-GROUP  BY classes.class_id
-ORDER  BY registration_count DESC
-LIMIT  5; ---- OR 3?
+SELECT 
+  classes.class_id,
+  name AS class_name,
+  SUM(attendance_status = 'Registered') AS registration_count
+FROM class_schedule
+  JOIN class_attendance
+    ON class_schedule.schedule_id = class_attendance.schedule_id
+  JOIN classes
+    ON class_schedule.class_id = classes.class_id
+GROUP BY classes.class_id
+ORDER BY registration_count DESC
+LIMIT 5; ---- OR 3?
 
 
 
