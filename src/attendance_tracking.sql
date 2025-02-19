@@ -13,11 +13,12 @@ VALUES (7, 1, datetime('now'));
 
 -- 2. Retrieve a member's attendance history
 -- TODO: Write a query to retrieve a member's attendance history
-SELECT strftime('%F', check_in_time)  AS visit_date,
-       strftime('%T', check_in_time)  AS check_in_time,
-       strftime('%T', check_out_time) AS check_out_time
-FROM   attendance
-WHERE  member_id = 5; 
+SELECT 
+    strftime('%F', check_in_time)  AS visit_date,
+    strftime('%T', check_in_time)  AS check_in_time,
+    strftime('%T', check_out_time) AS check_out_time
+FROM  attendance
+WHERE member_id = 5; 
 
 -- 3. Find the busiest day of the week based on gym visits
 -- TODO: Write a query to find the busiest day of the week based on gym visits
@@ -38,8 +39,10 @@ LIMIT 1;
 
 -- 4. Calculate the average daily attendance for each location
 -- TODO: Write a query to calculate the average daily attendance for each location
-SELECT name AS location_name, AVG(COUNT(strftime('%F',check_in_time))) AS avg_daily_attendance
+SELECT name AS location_name, COUNT(DISTINCT(strftime('%F',check_in_time))) * 1.0 /
+    (julianday('now') - julianday(MIN(check_in_time))) AS avg_daily_attendance
 FROM attendance
-JOIN locations on locations.location_id = attendance.attendance_id
+JOIN locations ON locations.location_id = attendance.location_id
 GROUP BY location_name;
+
 ------------------------- LOOK AT THISSS! NOT WORKING! --------------------------------

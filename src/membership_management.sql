@@ -5,6 +5,8 @@
 
 -- Enable foreign key support
 PRAGMA foreign_keys = ON;
+
+
 -- Membership Management Queries
 
 -- 1. List all active memberships
@@ -40,4 +42,3 @@ FROM   memberships
         JOIN members
             ON members.member_id = memberships.member_id
 WHERE  strftime('%Y', end_date) = strftime('%Y', 'now'); 
--------   CHECK ENGLISH  ----------------

@@ -4,16 +4,16 @@
 
 -- Enable foreign key support
 PRAGMA foreign_keys = ON;
+
+
 -- Equipment Management Queries
 
 -- 1. Find equipment due for maintenance
--- TODO: Write a query to find equipment due for maintenance
 SELECT equipment_id,
-       NAME,
+       name,
        next_maintenance_date
 FROM   equipment
-WHERE  julianday(next_maintenance_date) - julianday('now') < 30; 
----------   refactor?   ---------
+WHERE  julianday(next_maintenance_date) - julianday('now') BETWEEN 0 AND 30;
 
 -- 2. Count equipment types in stock
 -- TODO: Write a query to count equipment types in stock

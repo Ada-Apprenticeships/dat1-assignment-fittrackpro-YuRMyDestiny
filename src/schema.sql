@@ -69,7 +69,7 @@ CREATE TABLE staff (
     last_name VARCHAR[255] NOT NULL,
     email VARCHAR[255] UNIQUE NOT NULL,
     phone_number CHAR[8] UNIQUE NOT NULL,
-    position VARCHAR[12] NOT NULL CHECK(position IN ('Trainer', 'Manager', 'Receptionist')), -- maintenance?
+    position VARCHAR[12] NOT NULL CHECK(position IN ('Trainer', 'Manager', 'Receptionist', 'Maintenance')), -- maintenance?
     hire_date DATE NOT NULL,
     location_id INTEGER NOT NULL,
     FOREIGN KEY (location_id) REFERENCES locations(location_id)
@@ -215,7 +215,7 @@ VALUES
 ('Emma', 'Davis', 'emma.d@fittrackpro.com', '555-5555', 'Manager', '2024-11-15', 2),
 ('Frank', 'Evans', 'frank.e@fittrackpro.com', '555-6666', 'Receptionist', '2024-12-10', 1),
 ('Grace', 'Green', 'grace.g@fittrackpro.com', '555-7777', 'Trainer', '2024-12-20', 2),
-('Henry', 'Harris', 'henry.h@fittrackpro.com', '555-8888', 'Manager', '2025-01-05', 1), -- WAS MAINTENANCE !!!
+('Henry', 'Harris', 'henry.h@fittrackpro.com', '555-8888', 'Maintenance', '2025-01-05', 1), -- !!!
 ('Ivy', 'Irwin', 'ivy.i@fittrackpro.com', '555-9999', 'Trainer', '2025-01-01', 2),
 ('Jack', 'Johnson', 'jack.j@fittrackpro.com', '555-0000', 'Manager', '2024-11-15', 1),
 ('Karen', 'King', 'karen.k@fittrackpro.com', '555-1212', 'Trainer', '2024-12-01', 2);
